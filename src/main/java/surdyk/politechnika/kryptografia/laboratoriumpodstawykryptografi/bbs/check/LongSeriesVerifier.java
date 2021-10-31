@@ -1,5 +1,8 @@
 package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check;
 
+import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.seriescounter.CountedSeries;
+import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.seriescounter.SeriesCounter;
+
 import java.util.List;
 
 public class LongSeriesVerifier {

@@ -2,6 +2,8 @@ package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.che
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.seriescounter.CountedSeries;
+import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.seriescounter.SeriesCounter;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,6 +1,7 @@
 package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs;
 
 import org.junit.jupiter.api.Test;
+import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.BitsVerifier;
 import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.LongSeriesVerifier;
 import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.SeriesVerifier;
 
@@ -13,7 +14,7 @@ class BbsGeneratorTest {
     private static final Integer LENGTH_20K = 20000;
     private static final Integer LENGTH_1M = 1000000;
     final Long blumNumberN = Long.valueOf("789");
-    final Long naturalNumberA = Long.valueOf("291234124121");
+    final Long naturalNumberA = Long.valueOf("238470123486127834");
 
     BbsGenerator uut = new BbsGenerator();
 
@@ -25,15 +26,14 @@ class BbsGeneratorTest {
 
     @Test
     public void bitsTest() {
+        // given
         List<Boolean> result = uut.generate(blumNumberN, LENGTH_20K, naturalNumberA, true);
-        int counter = 0;
-        for (int i = 0 ; i < LENGTH_20K; i++){
-            if (result.get(i)){
-                counter++;
-            };
-        }
-        assertTrue( counter < 10275);
-        assertTrue( counter > 9725);
+        BitsVerifier bitsVerifier = new BitsVerifier();
+
+        // when
+        boolean passed = bitsVerifier.check(result);
+
+        assertTrue( passed);
     }
 
     @Test

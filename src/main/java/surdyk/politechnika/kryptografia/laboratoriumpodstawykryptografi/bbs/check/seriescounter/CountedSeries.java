@@ -1,4 +1,4 @@
-package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check;
+package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.seriescounter;
 
 import lombok.Getter;
 
