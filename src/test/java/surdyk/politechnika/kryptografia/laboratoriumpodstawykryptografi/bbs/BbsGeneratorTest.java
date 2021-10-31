@@ -8,10 +8,10 @@ import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.chec
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.BbsConstants.TEST_LENGTH_20K;
 
 class BbsGeneratorTest {
 
-    private static final Integer LENGTH_20K = 20000;
     private static final Integer LENGTH_1M = 1000000;
     final Long blumNumberN = Long.valueOf("789");
     final Long naturalNumberA = Long.valueOf("238470123486127834");
@@ -21,13 +21,13 @@ class BbsGeneratorTest {
 
     @Test
     public void simpleTest20K(){
-        uut.generate(blumNumberN, LENGTH_20K, naturalNumberA, true);
+        uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
     }
 
     @Test
     public void bitsTest() {
         // given
-        List<Boolean> result = uut.generate(blumNumberN, LENGTH_20K, naturalNumberA, true);
+        List<Boolean> result = uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
         BitsVerifier bitsVerifier = new BitsVerifier();
 
         // when
@@ -39,7 +39,7 @@ class BbsGeneratorTest {
     @Test
     public void longSeriesTest() {
         // given
-        List<Boolean> result = uut.generate(blumNumberN, LENGTH_20K, naturalNumberA, true);
+        List<Boolean> result = uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
         LongSeriesVerifier longSeriesVerifier = new LongSeriesVerifier();
 
         // when
@@ -52,7 +52,7 @@ class BbsGeneratorTest {
     @Test
     public void seriesTest() {
         // given
-        List<Boolean> result = uut.generate(blumNumberN, LENGTH_20K, naturalNumberA, true);
+        List<Boolean> result = uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
         SeriesVerifier seriesVerifier = new SeriesVerifier();
 
         // when

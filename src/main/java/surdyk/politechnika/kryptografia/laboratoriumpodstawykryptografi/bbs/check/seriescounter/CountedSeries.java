@@ -19,7 +19,6 @@ public class CountedSeries {
         if (seriesLengthCount == null){
             ArrayList<Integer> list = new ArrayList<>();
             list.add(0);
-            list.add(0);
             list.set(getIndex(value), 1);
             seriesCounter.put(seriesLength, list);
         } else {
