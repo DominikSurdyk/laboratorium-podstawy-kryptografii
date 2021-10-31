@@ -11,13 +11,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.BbsConstants.TEST_LENGTH_20K;
 
-class BbsGeneratorTest {
+class BbsGeneratorImplTest {
 
     private static final Integer LENGTH_1M = 1000000;
     final Long blumNumberN = Long.valueOf("789");
     final Long naturalNumberA = Long.valueOf("238470123486127834");
 
-    BbsGenerator uut = new BbsGenerator();
+    BbsGeneratorImpl uut = new BbsGeneratorImpl();
 
 
     @Test
