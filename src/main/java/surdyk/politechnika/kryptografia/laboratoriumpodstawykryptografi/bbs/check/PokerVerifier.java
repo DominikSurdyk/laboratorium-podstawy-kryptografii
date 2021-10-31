@@ -1,27 +1,33 @@
 package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check;
 
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
+import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.pockeradditionals.BlocksCounter;
 import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.pockeradditionals.NumberBlock;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.BbsConstants.TEST_LENGTH_20K;
 
-@Data
 public class PokerVerifier {
-
+    @Getter
+    BlocksCounter blocksCounter = new BlocksCounter();
 
     public boolean check(final List<Boolean> request) {
-
-
-
-        return true;
+        final int[] blocksCount = getBlocksCounter().count(request);
+        final float expressionResult = expressionResult(blocksCount);
+        return inRange(expressionResult);
     }
 
+    private float expressionResult(final int[] blocksCount) {
+        float sigma = 0;
+        for (int i = 0; i <= NumberBlock.LAST_BLOCK_INDEX; i++) {
+            sigma += Math.pow(blocksCount[i], 2);
+        }
+        return ((float) 16 / 5000) * sigma - 5000;
+    }
 
-
+    private boolean inRange(final float result) {
+        return result > 2.16 &&
+                result < 46.17;
+    }
 
 }

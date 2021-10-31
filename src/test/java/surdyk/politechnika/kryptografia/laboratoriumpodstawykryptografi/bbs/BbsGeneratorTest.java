@@ -3,6 +3,7 @@ package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs;
 import org.junit.jupiter.api.Test;
 import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.BitsVerifier;
 import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.LongSeriesVerifier;
+import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.PokerVerifier;
 import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.SeriesVerifier;
 
 import java.util.List;
@@ -61,5 +62,18 @@ class BbsGeneratorTest {
         // then
         assertTrue(passed);
 
+    }
+
+    @Test
+    public void pokerTest() {
+        // given
+        List<Boolean> result = uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
+        PokerVerifier pokerVerifier = new PokerVerifier();
+
+        // when
+        boolean passed = pokerVerifier.check(result);
+
+        // then
+        assertTrue(passed);
     }
 }

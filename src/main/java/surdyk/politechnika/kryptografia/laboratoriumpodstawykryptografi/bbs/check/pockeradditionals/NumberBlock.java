@@ -3,6 +3,7 @@ package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.che
 public class NumberBlock {
     public static int LENGTH = 4;
     public static int LAST_DIGIT_INDEX = 3;
+    public static int LAST_BLOCK_INDEX = 15;
 
 
     private Boolean digit8;
