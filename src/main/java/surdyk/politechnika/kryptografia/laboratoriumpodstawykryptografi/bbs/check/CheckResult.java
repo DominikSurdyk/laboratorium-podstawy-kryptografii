@@ -1,6 +1,12 @@
 package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check;
 
-public interface CheckResult {
-    public boolean passed();
-    public String details();
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@Data
+@AllArgsConstructor
+public class CheckResult {
+    private boolean passed;
+    private String details;
 }

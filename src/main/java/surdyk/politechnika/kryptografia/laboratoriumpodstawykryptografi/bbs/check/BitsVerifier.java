@@ -19,6 +19,6 @@ public class BitsVerifier {
     private CheckResult inRange(final int counter) {
         final boolean passed = counter > ONES_LOWER_BOUND &&
                 counter < ONES_UPPER_BOUND;
-        return new BitsCheckResult(passed, "[BitsTest] Ones counted: " + counter);
+        return new CheckResult(passed, "[Test bitów] Nieprawidłowa ilość cyfr [1]. Zliczono: [" + counter + "]");
     }
 }

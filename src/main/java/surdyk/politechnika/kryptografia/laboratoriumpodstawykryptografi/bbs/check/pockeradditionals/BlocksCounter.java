@@ -1,16 +1,14 @@
 package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.pockeradditionals;
 
-import lombok.Getter;
-
 import java.util.Arrays;
 import java.util.List;
 
 
 public class BlocksCounter {
-    @Getter
-    private final int[] result = new int[16];
+
 
     public int[] count(final List<Boolean> request) {
+        final int[] result = new int[16];
         Arrays.fill(result, 0);
 
         NumberBlock numberBlock = new NumberBlock();

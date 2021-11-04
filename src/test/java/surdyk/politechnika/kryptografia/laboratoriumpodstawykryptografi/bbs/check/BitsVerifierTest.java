@@ -20,7 +20,7 @@ class BitsVerifierTest {
         CheckResult result = uut.check(request);
 
         // then
-        assertFalse(result.passed());
+        assertFalse(result.isPassed());
     }
 
     @Test
@@ -32,8 +32,8 @@ class BitsVerifierTest {
         CheckResult result = uut.check(request);
 
         // then
-        assertFalse(result.passed());
-        assertEquals("[BitsTest] Ones counted: 9724", result.details());
+        assertFalse(result.isPassed());
+        assertEquals("[Test bitów] Nieprawidłowa ilość cyfr [1]. Zliczono: [9724]", result.getDetails());
     }
 
     @Test
@@ -45,7 +45,7 @@ class BitsVerifierTest {
         CheckResult result = uut.check(request);
 
         // then
-        assertTrue(result.passed());
+        assertTrue(result.isPassed());
     }
 
     private List<Boolean> generateInput(final int onesCount) {

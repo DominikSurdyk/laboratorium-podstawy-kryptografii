@@ -42,8 +42,8 @@ class BbsGeneratorImplTest {
         // when
         CheckResult result = bitsVerifier.check(request);
 
-        System.out.println(result.details());
-        assertTrue(result.passed());
+        System.out.println(result.getDetails());
+        assertTrue(result.isPassed());
     }
 
     @Test
@@ -64,10 +64,10 @@ class BbsGeneratorImplTest {
         SeriesVerifier seriesVerifier = new SeriesVerifier();
 
         // when
-        boolean passed = seriesVerifier.check(request);
+        CheckResult passed = seriesVerifier.check(request);
 
         // then
-        assertTrue(passed);
+        assertTrue(passed.isPassed());
 
     }
 
