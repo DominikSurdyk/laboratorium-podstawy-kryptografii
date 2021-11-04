@@ -2,26 +2,23 @@ package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.che
 
 import java.util.List;
 
-import static surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.BbsConstants.TEST_LENGTH_20K;
-
 public class BitsVerifier {
+    private static final int ONES_UPPER_BOUND = 10275;
+    private static final int ONES_LOWER_BOUND = 9725;
 
-    private static int ONES_UPPER_BOUND = 10275;
-    private static int ONES_LOWER_BOUND = 9725;
-
-
-    public boolean check(final List<Boolean> request) {
+    public CheckResult check(final List<Boolean> request) {
         int counter = 0;
-        for (int i = 0 ; i < TEST_LENGTH_20K; i++){
-            if (request.get(i)){
+        for (int i = 0; i < request.size(); i++) {
+            if (request.get(i)) {
                 counter++;
-            };
+            }
         }
         return inRange(counter);
     }
 
-    private boolean inRange(final int counter) {
-        return counter > ONES_LOWER_BOUND &&
+    private CheckResult inRange(final int counter) {
+        final boolean passed = counter > ONES_LOWER_BOUND &&
                 counter < ONES_UPPER_BOUND;
+        return new BitsCheckResult(passed, "[BitsTest] Ones counted: " + counter);
     }
 }

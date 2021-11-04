@@ -1,50 +1,58 @@
 package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.BitsVerifier;
-import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.LongSeriesVerifier;
-import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.PokerVerifier;
-import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.SeriesVerifier;
+import org.junit.jupiter.api.TestInstance;
+import surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.*;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.bbs.check.BbsConstants.TEST_LENGTH_20K;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class BbsGeneratorImplTest {
 
-    private static final Integer LENGTH_1M = 1000000;
-    final Long blumNumberN = Long.valueOf("789");
-    final Long naturalNumberA = Long.valueOf("238470123486127834");
+    // 50000057
+    final Long blumNumberN = Long.valueOf("50000057");
+    // 2500011
+    final Long naturalNumberA = Long.valueOf("2500011");
 
     BbsGeneratorImpl uut = new BbsGeneratorImpl();
+    List<Boolean> request;
+
+    @BeforeAll
+    public void initSeries() {
+        System.out.println("Generating 20k long series");
+        request = uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
+    }
 
 
     @Test
-    public void simpleTest20K(){
-        uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
+    public void simpleTest20K() {
+        assertEquals(20000, request.size());
     }
 
     @Test
     public void bitsTest() {
         // given
-        List<Boolean> result = uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
         BitsVerifier bitsVerifier = new BitsVerifier();
 
         // when
-        boolean passed = bitsVerifier.check(result);
+        CheckResult result = bitsVerifier.check(request);
 
-        assertTrue( passed);
+        System.out.println(result.details());
+        assertTrue(result.passed());
     }
 
     @Test
     public void longSeriesTest() {
         // given
-        List<Boolean> result = uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
         LongSeriesVerifier longSeriesVerifier = new LongSeriesVerifier();
 
         // when
-        boolean passed = longSeriesVerifier.check(result);
+        boolean passed = longSeriesVerifier.check(request);
 
         // then
         assertTrue(passed);
@@ -53,11 +61,10 @@ class BbsGeneratorImplTest {
     @Test
     public void seriesTest() {
         // given
-        List<Boolean> result = uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
         SeriesVerifier seriesVerifier = new SeriesVerifier();
 
         // when
-        boolean passed = seriesVerifier.check(result);
+        boolean passed = seriesVerifier.check(request);
 
         // then
         assertTrue(passed);
@@ -67,11 +74,10 @@ class BbsGeneratorImplTest {
     @Test
     public void pokerTest() {
         // given
-        List<Boolean> result = uut.generate(blumNumberN, TEST_LENGTH_20K, naturalNumberA, true);
         PokerVerifier pokerVerifier = new PokerVerifier();
 
         // when
-        boolean passed = pokerVerifier.check(result);
+        boolean passed = pokerVerifier.check(request);
 
         // then
         assertTrue(passed);
