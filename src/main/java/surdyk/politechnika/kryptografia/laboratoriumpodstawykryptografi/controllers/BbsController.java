@@ -33,7 +33,6 @@ public class BbsController {
     @ResponseBody
     @CrossOrigin(origins = {"*"})
     public CheckResult checkSeries(final @PathVariable String testName, @RequestBody final List<Boolean> series) {
-        CheckResult check = verifierService.check(testName, series);
-        return check;
+        return verifierService.check(testName, series);
     }
 }

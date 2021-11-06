@@ -11,7 +11,7 @@ public class PokerVerifier {
     @Getter
     BlocksCounter blocksCounter = new BlocksCounter();
 
-    public boolean check(final List<Boolean> request) {
+    public CheckResult check(final List<Boolean> request) {
         final int[] blocksCount = getBlocksCounter().count(request);
         final float expressionResult = expressionResult(blocksCount);
         return inRange(expressionResult);
@@ -25,9 +25,11 @@ public class PokerVerifier {
         return ((float) 16 / 5000) * sigma - 5000;
     }
 
-    private boolean inRange(final float result) {
+    private CheckResult inRange(final float result) {
         return result > 2.16 &&
-                result < 46.17;
+                result < 46.17 ?
+                new CheckResult(true, "") :
+                new CheckResult(false, "Współczynnik testu pokerowego jest poza dopuszczalnymi granicami. Wynosi: [" + result + "]");
     }
 
 }

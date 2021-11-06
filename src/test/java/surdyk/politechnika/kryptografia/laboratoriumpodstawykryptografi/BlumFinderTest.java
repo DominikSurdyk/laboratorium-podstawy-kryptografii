@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BlumFinderTest {
 
-    private static int BLUM_RANGE_START = 50000000;
-    private static int BLUM_RANGE_END = 50002000;
+    private static int BLUM_RANGE_START = 60000000;
+    private static int BLUM_RANGE_END = 60002000;
 
 
 //    @Test

@@ -14,10 +14,10 @@ import static surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.b
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class BbsGeneratorImplTest {
 
-    // 50000057
-    final Long blumNumberN = Long.valueOf("50000057");
-    // 2500011
-    final Long naturalNumberA = Long.valueOf("2500011");
+    // 50000057, 60000009, 60000077
+    final Long blumNumberN = Long.valueOf("60000077");
+    // 2500011, 2500010, 2500010
+    final Long naturalNumberA = Long.valueOf("2500010");
 
     BbsGeneratorImpl uut = new BbsGeneratorImpl();
     List<Boolean> request;
@@ -52,10 +52,10 @@ class BbsGeneratorImplTest {
         LongSeriesVerifier longSeriesVerifier = new LongSeriesVerifier();
 
         // when
-        boolean passed = longSeriesVerifier.check(request);
+        CheckResult result = longSeriesVerifier.check(request);
 
         // then
-        assertTrue(passed);
+        assertTrue(result.isPassed());
     }
 
     @Test
@@ -77,9 +77,9 @@ class BbsGeneratorImplTest {
         PokerVerifier pokerVerifier = new PokerVerifier();
 
         // when
-        boolean passed = pokerVerifier.check(request);
+        CheckResult result = pokerVerifier.check(request);
 
         // then
-        assertTrue(passed);
+        assertTrue(result.isPassed());
     }
 }

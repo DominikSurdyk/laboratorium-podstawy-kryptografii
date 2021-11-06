@@ -22,10 +22,10 @@ class LongSeriesVerifierTest {
                 true, true, true, true, true);
 
         // when
-        boolean result = uut.check(testValue);
+        CheckResult result = uut.check(testValue);
 
         // then
-        assertTrue(result);
+        assertTrue(result.isPassed());
     }
 
     @Test
@@ -39,9 +39,9 @@ class LongSeriesVerifierTest {
                 true, true, true, true, true, true);
 
         // when
-        boolean result = uut.check(testValue);
+        CheckResult result = uut.check(testValue);
 
         // then
-        assertFalse(result);
+        assertFalse(result.isPassed());
     }
 }

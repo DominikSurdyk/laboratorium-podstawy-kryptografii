@@ -21,8 +21,8 @@ public class SeriesVerifier {
     private static final int SERIES_5_LENGTH_MAX_COUNT = 209;
     private static final int SERIES_6_LENGTH_OR_MORE_MIN_COUNT = 103;
     private static final int SERIES_6_LENGTH_OR_MORE_MAX_COUNT = 209;
-    private static final String FAIL_COMMUNICATE_ONE_TO_FIVE = "Za dużo ciagów o długości: [%d], dla cyfry: [%d]. Zliczono: [%d]";
-    private static final String FAIL_COMMUNICATE_SIX_AND_MORE = "Za dużo ciagów o długości: >=6, dla cyfry: [%d]. Zliczono: [%d]";
+    private static final String FAIL_COMMUNICATE_ONE_TO_FIVE = "Za dużo ciagów o długości: [%d], dla cyfry: [%d]. Zliczono: [%d]<br>";
+    private static final String FAIL_COMMUNICATE_SIX_AND_MORE = "Za dużo ciagów o długości: >=6, dla cyfry: [%d]. Zliczono: [%d]<br>";
 
 
     private final SeriesCounter seriesCounter = new SeriesCounter();
@@ -119,7 +119,7 @@ public class SeriesVerifier {
         } else {
             results.stream()
                     .filter(result -> !result.isPassed())
-                    .forEach(result -> errorMessages.set(errorMessages + result.getDetails() + "\n"));
+                    .forEach(result -> errorMessages.set(errorMessages + result.getDetails()));
             return new CheckResult(false, errorMessages.get());
         }
     }
