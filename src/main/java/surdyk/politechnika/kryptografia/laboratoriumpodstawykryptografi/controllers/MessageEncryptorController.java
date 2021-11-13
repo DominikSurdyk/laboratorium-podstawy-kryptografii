@@ -35,14 +35,18 @@ public class MessageEncryptorController {
     @PostMapping("/decrypt/string")
     @ResponseBody
     @CrossOrigin(origins = {"*"})
-    public String decryptToString(final @RequestBody MessageEncryptorRequest request) {
-        return encryptorService.decryptToString(request.getMessageAscii(), request.getKey());
+    public DecryptionResponse decryptToString(final @RequestBody MessageEncryptorRequest request) {
+        return new DecryptionResponse(
+                encryptorService.decryptToString(request.getMessageAscii(), request.getKey()),
+                null);
     }
 
     @PostMapping("/decrypt/ascii")
     @ResponseBody
     @CrossOrigin(origins = {"*"})
-    public List<Boolean> decryptToAscii(final @RequestBody MessageEncryptorRequest request) {
-        return encryptorService.decryptToAscii(request.getMessageAscii(), request.getKey());
+    public DecryptionResponse decryptToAscii(final @RequestBody MessageEncryptorRequest request) {
+        return new DecryptionResponse(
+                null,
+                encryptorService.decryptToAscii(request.getMessageAscii(), request.getKey()));
     }
 }

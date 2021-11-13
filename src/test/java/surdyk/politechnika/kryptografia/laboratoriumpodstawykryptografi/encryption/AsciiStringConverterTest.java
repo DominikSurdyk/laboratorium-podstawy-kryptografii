@@ -21,21 +21,51 @@ class AsciiStringConverterTest {
 
         // then
         assertEquals(Arrays.asList(
-                true, true, true, false, true, false, false,
-                true, true, false, false, true, false, true,
-                true, true, true, false, false, true, true,
-                true, true, true, false, true, false, false
-                ), result);
+                false, true, true, true, false, true, false, false,
+                false, true, true, false, false, true, false, true,
+                false, true, true, true, false, false, true, true,
+                false, true, true, true, false, true, false, false
+        ), result);
+    }
+
+    @Test
+    public void shouldParseCorrectlyMessageWithSpace() {
+        // given
+        final String message = "a a";
+
+        // when
+        List<Boolean> result = uut.messageToAsciiSeries(message);
+
+        // then
+        assertEquals(Arrays.asList(
+                false, true, true, false, false, false, false, true,
+                false, false, true, false, false, false, false, false,
+                false, true, true, false, false, false, false, true
+        ), result);
+    }
+
+    @Test
+    public void shouldParseCorrectlyMessageWithOnlySpace() {
+        // given
+        final String message = " ";
+
+        // when
+        List<Boolean> result = uut.messageToAsciiSeries(message);
+
+        // then
+        assertEquals(Arrays.asList(
+                false, false, true, false, false, false, false, false
+        ), result);
     }
 
     @Test
     public void shouldParseCorrectlyListToString() {
         // given
         final List<Boolean> message = Arrays.asList(
-                true, true, true, false, true, false, false,
-                true, true, false, false, true, false, true,
-                true, true, true, false, false, true, true,
-                true, true, true, false, true, false, false
+                false, true, true, true, false, true, false, false,
+                false, true, true, false, false, true, false, true,
+                false, true, true, true, false, false, true, true,
+                false, true, true, true, false, true, false, false
         );
 
         // when
