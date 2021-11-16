@@ -2,16 +2,17 @@ package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.aes;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class AesEcbTest {
 
+
+    private static final String SECRET = "a";
+
     @Test
-    public void callEcb(){
-        String encrypted = AesEcb.encrypt("lubie placki z batatow i tym podobne", "123456gsfdgsdfg789012345");
+    public void callEcb() {
+        String encrypted = AesEcb.encrypt("Test  1234567890", SECRET);
         System.out.println(encrypted);
 
-        String decrypted = AesEcb.decrypt(encrypted, "123456gsfdgsdfg789012345");
+        String decrypted = AesEcb.decrypt(encrypted, SECRET);
         System.out.println(decrypted);
 
     }

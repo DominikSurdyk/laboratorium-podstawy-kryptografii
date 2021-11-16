@@ -46,7 +46,7 @@ public class MessageBlocksParser {
 
     public List<Boolean> removePadding(List<Boolean> block) {
         int padding = getLastNumber(block);
-        if (padding > 15 || padding == 0) {
+        if (padding > CHARS_IN_BLOCK - 1 || padding == 0) {
             return block;
         }
         for (int i = 0 ; i < padding * CHAR_SIZE; i++){
