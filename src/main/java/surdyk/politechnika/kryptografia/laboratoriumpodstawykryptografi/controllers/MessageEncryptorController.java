@@ -19,7 +19,7 @@ public class MessageEncryptorController {
     @CrossOrigin(origins = {"*"})
     public List<Boolean> encryptAscii(final @RequestBody MessageEncryptorRequest request) {
         final List<Boolean> result = encryptorService.encryptFromAscii(request.getMessageAscii(), request.getKey());
-        saveLocallyService.saveEncryptedMessage(request.getMessageFileName(), request.getKeyFileName(), result);
+        saveLocallyService.saveEncryptedBbsMessage(request.getMessageFileName(), request.getKeyFileName(), result);
         return result;
     }
 
@@ -28,7 +28,7 @@ public class MessageEncryptorController {
     @CrossOrigin(origins = {"*"})
     public List<Boolean> encryptString(final @RequestBody MessageEncryptorRequest request) {
         final List<Boolean> result = encryptorService.encryptFromString(request.getMessageString(), request.getKey());
-        saveLocallyService.saveEncryptedMessage(request.getMessageFileName(), request.getKeyFileName(), result);
+        saveLocallyService.saveEncryptedBbsMessage(request.getMessageFileName(), request.getKeyFileName(), result);
         return result;
     }
 

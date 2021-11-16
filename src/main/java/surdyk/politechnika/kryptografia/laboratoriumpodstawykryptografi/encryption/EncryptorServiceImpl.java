@@ -12,23 +12,23 @@ public class EncryptorServiceImpl implements EncryptorService {
     @Override
     public List<Boolean> encryptFromString(String message, List<Boolean> key) {
         final List<Boolean> messageAscii = asciiStringConverter.messageToAsciiSeries(message);
-        return messageProcessor.parse(messageAscii, key);
+        return messageProcessor.xor(messageAscii, key);
     }
 
     @Override
     public List<Boolean> encryptFromAscii(List<Boolean> messageAscii, List<Boolean> key) {
-        return messageProcessor.parse(messageAscii, key);
+        return messageProcessor.xor(messageAscii, key);
     }
 
     @Override
     public List<Boolean> decryptToAscii(List<Boolean> messageAscii, List<Boolean> key) {
-        return messageProcessor.parse(messageAscii, key);
+        return messageProcessor.xor(messageAscii, key);
 
     }
 
     @Override
     public String decryptToString(List<Boolean> messageAscii, List<Boolean> key) {
-        final List<Boolean> decryptedMessage = messageProcessor.parse(messageAscii, key);
+        final List<Boolean> decryptedMessage = messageProcessor.xor(messageAscii, key);
         return asciiStringConverter.messageToString(decryptedMessage);
     }
 }

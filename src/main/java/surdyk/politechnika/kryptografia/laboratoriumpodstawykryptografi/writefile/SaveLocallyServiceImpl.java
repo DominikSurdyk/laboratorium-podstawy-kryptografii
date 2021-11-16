@@ -12,11 +12,20 @@ import java.util.List;
 @Service
 public class SaveLocallyServiceImpl implements SaveLocallyService {
 
-    @Value( "${series.generated.folder}" )
+    @Value("${series.generated.path}")
     private String generatedBbsSavePath;
 
-    @Value( "${encrypted.folder}" )
-    private String encryptedMessagesSavePath;
+    @Value("${encrypted.bbs.path}")
+    private String encryptedBbsMessagesSavePath;
+
+    @Value("${encrypted.ecb.path}")
+    private String encryptedEcbMessagesSavePath;
+
+    @Value("${encrypted.cbc.path}")
+    private String encryptedCbcMessagesSavePath;
+
+    @Value("${encrypted.pbc.path}")
+    private String encryptedPbcMessagesSavePath;
 
     public void saveBbs(final Long blumNumber, final Integer length, final Long randomNumber, final List<Boolean> series) {
         try {
@@ -30,9 +39,9 @@ public class SaveLocallyServiceImpl implements SaveLocallyService {
     }
 
     @Override
-    public void saveEncryptedMessage(final String messageFileName, final String keyFileName, final List<Boolean> encryptedMessage) {
+    public void saveEncryptedBbsMessage(final String messageFileName, final String keyFileName, final List<Boolean> encryptedMessage) {
         try {
-            FileWriter fileWriter = new FileWriter(new File(encryptedMessagesSavePath, generateEncryptedFileName(messageFileName, keyFileName)));
+            FileWriter fileWriter = new FileWriter(new File(encryptedBbsMessagesSavePath, generateEncryptedBbsFileName(messageFileName, keyFileName)));
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.print(generateContent(encryptedMessage));
             printWriter.close();
@@ -41,12 +50,48 @@ public class SaveLocallyServiceImpl implements SaveLocallyService {
         }
     }
 
+    @Override
+    public void saveEncryptedEcbMessage(final String encryptedMessage, final String secret) {
+        try {
+            FileWriter fileWriter = new FileWriter(new File(encryptedEcbMessagesSavePath, generateEncryptedEcbFileName(secret)));
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.print(encryptedMessage);
+            printWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void saveEncryptedCbcMessage(final String encryptedMessage, final String secret, final String initVector) {
+        try {
+            FileWriter fileWriter = new FileWriter(new File(encryptedCbcMessagesSavePath, generateEncryptedCbcFileName(secret, initVector)));
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.print(encryptedMessage);
+            printWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void saveEncryptedPbcMessage(final String encryptedMessage, final String secret, final String initVector) {
+        try {
+            FileWriter fileWriter = new FileWriter(new File(encryptedPbcMessagesSavePath, generateEncryptedPbcFileName(secret, initVector)));
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.print(encryptedMessage);
+            printWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private String generateContent(final List<Boolean> content) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Boolean b : content){
-            if (b){
+        for (Boolean b : content) {
+            if (b) {
                 stringBuilder.append("1");
-            }else {
+            } else {
                 stringBuilder.append("0");
             }
         }
@@ -57,11 +102,23 @@ public class SaveLocallyServiceImpl implements SaveLocallyService {
         return getDateString() + "_length-" + length + "_blumNumber-" + blumNumber + "_randomNumber-" + randomNumber + ".txt";
     }
 
-    private String generateEncryptedFileName(final String messageFileName, final String keyFileName) {
+    private String generateEncryptedBbsFileName(final String messageFileName, final String keyFileName) {
         return getDateString() + "___messageFileName-" + messageFileName + "___keyFileName-" + keyFileName + ".txt";
     }
 
-    private String getDateString(){
+    private String generateEncryptedEcbFileName(final String secret) {
+        return getDateString() + "_secret-" + secret + ".txt";
+    }
+
+    private String generateEncryptedCbcFileName(final String secret, final String initVector) {
+        return getDateString() + "_secret-" + secret + "_initVector-" + initVector + ".txt";
+    }
+
+    private String generateEncryptedPbcFileName(final String secret, final String initVector) {
+        return getDateString() + "_secret-" + secret + "_initVector-" + initVector + ".txt";
+    }
+
+    private String getDateString() {
         return java.time.LocalDate.now() + "_" + java.time.LocalTime.now();
     }
 }

@@ -19,7 +19,7 @@ class MessageProcessorTest {
         final List<Boolean> encrypted = Arrays.asList(false, true, true, false);
 
         // when
-        List<Boolean> result = uut.parse(key, message);
+        List<Boolean> result = uut.xor(key, message);
 
         // then
         assertEquals(encrypted, result);
@@ -33,7 +33,7 @@ class MessageProcessorTest {
         final List<Boolean> decryptedMessage = Arrays.asList(true, false, true, false);
 
         // when
-        List<Boolean> result = uut.parse(key, encryptedMessage);
+        List<Boolean> result = uut.xor(key, encryptedMessage);
 
         // then
         assertEquals(decryptedMessage, result);
