@@ -18,7 +18,7 @@ class MessageBlocksParserTest {
         final String request = "0123456789123456";
 
         // when
-        List<String> blocks = uut.toBlocks(request);
+        List<String> blocks = uut.to8CharBlocks(request);
 
         // then
         assertEquals(1, blocks.size());
@@ -31,7 +31,7 @@ class MessageBlocksParserTest {
         final String request = "01234567891234560";
 
         // when
-        List<String> blocks = uut.toBlocks(request);
+        List<String> blocks = uut.to8CharBlocks(request);
 
         // then
         assertEquals(2, blocks.size());
@@ -44,7 +44,7 @@ class MessageBlocksParserTest {
         final String request = "01234567891234560123456789123456";
 
         // when
-        List<String> blocks = uut.toBlocks(request);
+        List<String> blocks = uut.to8CharBlocks(request);
 
         // then
         assertEquals(2, blocks.size());

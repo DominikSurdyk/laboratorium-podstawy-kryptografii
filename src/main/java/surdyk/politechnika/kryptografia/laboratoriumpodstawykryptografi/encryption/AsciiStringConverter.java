@@ -9,7 +9,6 @@ public class AsciiStringConverter {
     public List<Boolean> messageToAsciiSeries(final String message) {
         final List<Boolean> result = new LinkedList<>();
         for (int i = 0; i < message.length(); i++) {
-            result.add(false);
             addChar(result, message.charAt(i));
         }
         return result;
@@ -58,7 +57,7 @@ public class AsciiStringConverter {
     }
 
     private String addLeadingZeros(String asciiCode) {
-        while ( ASCII_CHAR_LENGTH - 1 > asciiCode.length()){
+        while ( ASCII_CHAR_LENGTH > asciiCode.length()){
             asciiCode = "0" + asciiCode;
         }
         return asciiCode;

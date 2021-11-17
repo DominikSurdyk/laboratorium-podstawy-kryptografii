@@ -15,7 +15,7 @@ public class CbcServiceImpl implements CbcService {
     @Override
     public String encrypt(final String message, final String secret, final String initVector) {
         StringBuilder result = new StringBuilder();
-        List<String> blocks = messageBlocksParser.toBlocks(message);
+        List<String> blocks = messageBlocksParser.to8CharBlocks(message);
         List<Boolean> currentVector = asciiStringConverter.messageToAsciiSeries(initVector);
         for (String block : blocks) {
             List<Boolean> messageAscii = asciiStringConverter.messageToAsciiSeries(block);
@@ -33,7 +33,7 @@ public class CbcServiceImpl implements CbcService {
     @Override
     public String decrypt(final String encodedMessage, final String secret, final String initVector) {
         StringBuilder result = new StringBuilder();
-        List<String> blocks = messageBlocksParser.toBlocks(encodedMessage);
+        List<String> blocks = messageBlocksParser.to128BitBlocks(encodedMessage);
         List<Boolean> currentVector = asciiStringConverter.messageToAsciiSeries(initVector);
 
         for (String block : blocks) {

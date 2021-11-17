@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CbcServiceImplTest {
+class EcbServiceImplTest {
 
-    private CbcServiceImpl uut = new CbcServiceImpl();
+    private EcbServiceImpl uut = new EcbServiceImpl();
 
     @Test
     public void shouldEncryptAndDecryptOneBlockMessageMessage() {
@@ -16,8 +16,8 @@ class CbcServiceImplTest {
         final String initVector = "9999888877776666";
 
         // when
-        String encryptedMessage = uut.encrypt(message, secret, initVector);
-        String decryptedMessage = uut.decrypt(encryptedMessage, secret, initVector);
+        String encryptedMessage = uut.encrypt(message, secret);
+        String decryptedMessage = uut.decrypt(encryptedMessage, secret);
 
         // then
         assertEquals(message, decryptedMessage);
@@ -31,8 +31,8 @@ class CbcServiceImplTest {
         final String initVector = "9999888877776666";
 
         // when
-        String encryptedMessage = uut.encrypt(message, secret, initVector);
-        String decryptedMessage = uut.decrypt(encryptedMessage, secret, initVector);
+        String encryptedMessage = uut.encrypt(message, secret);
+        String decryptedMessage = uut.decrypt(encryptedMessage, secret);
 
         // then
         assertEquals(message, decryptedMessage);
@@ -46,11 +46,12 @@ class CbcServiceImplTest {
         final String initVector = "9999888877776666";
 
         // when
-        String encryptedMessage = uut.encrypt(message, secret, initVector);
-        String decryptedMessage = uut.decrypt(encryptedMessage, secret, initVector);
+        String encryptedMessage = uut.encrypt(message, secret);
+        String decryptedMessage = uut.decrypt(encryptedMessage, secret);
 
         // then
         assertEquals(message, decryptedMessage);
     }
+
 
 }

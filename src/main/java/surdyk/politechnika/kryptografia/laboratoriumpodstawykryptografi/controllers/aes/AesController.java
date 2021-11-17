@@ -20,7 +20,9 @@ public class AesController {
     @ResponseBody
     @CrossOrigin(origins = {"*"})
     public AesResponse ecbEncrypt(@RequestBody AesEncryptRequest request) {
-        return new AesResponse(ecbService.encrypt(request.getMessage(), request.getSecret()));
+        final String encryptedMessage = ecbService.encrypt(request.getMessage(), request.getSecret());
+        saveLocallyService.saveEncryptedEcbMessage(request.getMessage(), request.getSecret());
+        return new AesResponse(encryptedMessage);
     }
 
     @PostMapping("/aes/ecb/decrypt")
@@ -50,7 +52,9 @@ public class AesController {
     @ResponseBody
     @CrossOrigin(origins = {"*"})
     public AesResponse pbcEncrypt(@RequestBody AesEncryptRequest request) {
-        return new AesResponse(pbcService.encrypt(request.getMessage(), request.getSecret(), request.getInitVector()));
+        final String encryptedMessage = pbcService.encrypt(request.getMessage(), request.getSecret(), request.getInitVector());
+        saveLocallyService.saveEncryptedPbcMessage(encryptedMessage, request.getSecret(), request.getInitVector());
+        return new AesResponse(encryptedMessage);
     }
 
     @PostMapping("/aes/pbc/decrypt")

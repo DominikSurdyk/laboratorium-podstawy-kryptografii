@@ -4,9 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CbcServiceImplTest {
+class PbcServiceImplTest {
 
-    private CbcServiceImpl uut = new CbcServiceImpl();
+    private PbcServiceImpl uut = new PbcServiceImpl();
+
 
     @Test
     public void shouldEncryptAndDecryptOneBlockMessageMessage() {

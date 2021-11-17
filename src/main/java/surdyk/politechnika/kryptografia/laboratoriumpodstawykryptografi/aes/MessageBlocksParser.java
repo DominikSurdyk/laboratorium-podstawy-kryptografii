@@ -8,8 +8,8 @@ public class MessageBlocksParser {
     private static final Integer CHAR_SIZE = 8;
     private static final Integer BLOCK_BYTES_SIZE = CHARS_IN_BLOCK * CHAR_SIZE;
 
-    public List<String> toBlocks(final String message) {
-        final int blockNumbers = countBlocks(message);
+    public List<String> to8CharBlocks(final String message) {
+        final int blockNumbers = count8CharBlocks(message);
         final List<String> blocks = new LinkedList<>();
         for (int i = 0; i < blockNumbers; i++) {
             if (i == blockNumbers - 1) {
@@ -21,7 +21,20 @@ public class MessageBlocksParser {
         return blocks;
     }
 
-    private int countBlocks(final String message) {
+    public List<String> to128BitBlocks(final String message) {
+        final int blockNumbers = count128BitBlocks(message);
+        final List<String> blocks = new LinkedList<>();
+        for (int i = 0; i < blockNumbers; i++) {
+            if (i == blockNumbers - 1) {
+                blocks.add(message.substring(i * BLOCK_BYTES_SIZE));
+            } else {
+                blocks.add(message.substring(i * BLOCK_BYTES_SIZE, i * BLOCK_BYTES_SIZE + BLOCK_BYTES_SIZE));
+            }
+        }
+        return blocks;
+    }
+
+    private int count8CharBlocks(final String message) {
         if (message.length() == 0) {
             return 0;
         }
@@ -31,6 +44,17 @@ public class MessageBlocksParser {
             return 1 + message.length() / CHARS_IN_BLOCK;
         }
     }
+    private int count128BitBlocks(final String message) {
+        if (message.length() == 0) {
+            return 0;
+        }
+        if (message.length() % BLOCK_BYTES_SIZE == 0) {
+            return message.length() / BLOCK_BYTES_SIZE;
+        } else {
+            return 1 + message.length() / BLOCK_BYTES_SIZE;
+        }
+    }
+
 
     public List<Boolean> fillBlock(final List<Boolean> block) {
         if (block.size() == BLOCK_BYTES_SIZE) {
