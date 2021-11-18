@@ -7,7 +7,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
 
 @Service
 public class SaveLocallyServiceImpl implements SaveLocallyService {
@@ -119,6 +122,6 @@ public class SaveLocallyServiceImpl implements SaveLocallyService {
     }
 
     private String getDateString() {
-        return java.time.LocalDate.now() + "_" + java.time.LocalTime.now();
+        return java.time.LocalDate.now() + "_" + java.time.LocalTime.now().truncatedTo(ChronoUnit.SECONDS).format(ISO_LOCAL_TIME);
     }
 }

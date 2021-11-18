@@ -1,2 +1,6 @@
-# sciezka zapisu wygenerowanych ciagow
-series.generated.folder=
+# sciezki zapisu wygenerowanych ciagow
+series.generated.path=
+encrypted.bbs.path=
+encrypted.ecb.path=
+encrypted.cbc.path=
+encrypted.pbc.path=

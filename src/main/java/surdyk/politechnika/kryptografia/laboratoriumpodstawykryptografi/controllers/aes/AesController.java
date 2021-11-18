@@ -21,7 +21,7 @@ public class AesController {
     @CrossOrigin(origins = {"*"})
     public AesResponse ecbEncrypt(@RequestBody AesEncryptRequest request) {
         final String encryptedMessage = ecbService.encrypt(request.getMessage(), request.getSecret());
-        saveLocallyService.saveEncryptedEcbMessage(request.getMessage(), request.getSecret());
+        saveLocallyService.saveEncryptedEcbMessage(encryptedMessage, request.getSecret());
         return new AesResponse(encryptedMessage);
     }
 
