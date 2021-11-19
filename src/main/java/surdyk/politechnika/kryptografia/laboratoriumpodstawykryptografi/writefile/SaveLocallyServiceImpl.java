@@ -30,6 +30,9 @@ public class SaveLocallyServiceImpl implements SaveLocallyService {
     @Value("${encrypted.pbc.path}")
     private String encryptedPbcMessagesSavePath;
 
+    @Value("${encrypted.rsa.path}")
+    private String encryptedRsaMessagesSavePath;
+
     public void saveBbs(final Long blumNumber, final Integer length, final Long randomNumber, final List<Boolean> series) {
         try {
             FileWriter fileWriter = new FileWriter(new File(generatedBbsSavePath, generateBbsFileName(blumNumber, length, randomNumber)));
@@ -89,6 +92,18 @@ public class SaveLocallyServiceImpl implements SaveLocallyService {
         }
     }
 
+    @Override
+    public void saveEncryptedRsaMessage(String message, String eParamPublic, String dParamPrivate, String nParamCommon) {
+        try {
+            FileWriter fileWriter = new FileWriter(new File(encryptedRsaMessagesSavePath, generateEncryptedRsaFileName(eParamPublic,dParamPrivate,nParamCommon)));
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.print(message);
+            printWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private String generateContent(final List<Boolean> content) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Boolean b : content) {
@@ -119,6 +134,12 @@ public class SaveLocallyServiceImpl implements SaveLocallyService {
 
     private String generateEncryptedPbcFileName(final String secret, final String initVector) {
         return getDateString() + "_secret-" + secret + "_initVector-" + initVector + ".txt";
+    }
+
+    private String generateEncryptedRsaFileName(final String eParamPublic,
+                                                final String dParamPrivate,
+                                                final String nParamCommon) {
+        return getDateString() + "_eParamPublic-" + eParamPublic + "_dParamPrivate-" + dParamPrivate + "_nParamCommon-" + nParamCommon + ".txt";
     }
 
     private String getDateString() {

@@ -7,6 +7,7 @@ public class MessageBlocksParser {
     private static final Integer CHARS_IN_BLOCK = 16;
     private static final Integer CHAR_SIZE = 8;
     private static final Integer BLOCK_BYTES_SIZE = CHARS_IN_BLOCK * CHAR_SIZE;
+    private StringConverter stringConverter = new StringConverter();
 
     public List<String> to8CharBlocks(final String message) {
         final int blockNumbers = count8CharBlocks(message);
@@ -61,7 +62,7 @@ public class MessageBlocksParser {
             return block;
         }
         final int missingChars = (BLOCK_BYTES_SIZE - block.size()) / CHAR_SIZE;
-        final List<Boolean> digitToFill = toBooleanArray(missingChars);
+        final List<Boolean> digitToFill = stringConverter.toBooleanArray(missingChars);
         for (int i = 0; i < missingChars; i++) {
             block.addAll(digitToFill);
         }
@@ -89,27 +90,5 @@ public class MessageBlocksParser {
             digitValue = digitValue * 2;
         }
         return result;
-    }
-
-
-    private List<Boolean> toBooleanArray(final int number) {
-        String numberString = Integer.toBinaryString(number);
-        numberString = addLeadingZeros(numberString);
-        final List<Boolean> result = new LinkedList<>();
-        for (char digit : numberString.toCharArray()) {
-            if (digit == '1') {
-                result.add(true);
-            } else {
-                result.add(false);
-            }
-        }
-        return result;
-    }
-
-    private String addLeadingZeros(String asciiCode) {
-        while (CHAR_SIZE > asciiCode.length()) {
-            asciiCode = "0" + asciiCode;
-        }
-        return asciiCode;
     }
 }

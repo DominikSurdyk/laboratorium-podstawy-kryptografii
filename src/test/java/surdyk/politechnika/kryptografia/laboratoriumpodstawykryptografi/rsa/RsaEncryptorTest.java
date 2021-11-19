@@ -57,6 +57,7 @@ class RsaEncryptorTest {
 
         // when
         List<String> encrypted = uut.encryptAsNumber(message, e, n);
+
         List<String> decrypted = uut.decryptAsNumber(encrypted, d, n);
 
         // then
