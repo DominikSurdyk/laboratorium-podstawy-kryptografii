@@ -4,3 +4,4 @@ encrypted.bbs.path=
 encrypted.ecb.path=
 encrypted.cbc.path=
 encrypted.pbc.path=
+encrypted.rsa.path=
