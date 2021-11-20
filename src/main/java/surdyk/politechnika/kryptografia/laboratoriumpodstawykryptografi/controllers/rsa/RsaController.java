@@ -31,7 +31,7 @@ public class RsaController {
     @CrossOrigin(origins = {"*"})
     public RsaResponse rsaDecrypt(@RequestBody RsaRequest request) {
         final List<String> message = stringHelper.toArray(request.getMessage());
-        final String decrypted = rsaEncryptService.decrypt(message, request.getEParamPublic(), request.getNParamCommon());
+        final String decrypted = rsaEncryptService.decrypt(message, request.getDParamPrivate(), request.getNParamCommon());
         return new RsaResponse(decrypted);
     }
 }

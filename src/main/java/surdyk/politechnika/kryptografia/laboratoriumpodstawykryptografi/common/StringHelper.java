@@ -7,8 +7,11 @@ public class StringHelper {
 
     public String join(final List<String> strings) {
         final StringBuilder stringBuilder = new StringBuilder();
-        for (String part : strings) {
-            stringBuilder.append(part);
+        for (int i =0 ; i < strings.size(); i ++) {
+            stringBuilder.append(strings.get(i));
+            if (i < strings.size() - 1){
+                stringBuilder.append(" ");
+            }
         }
         return stringBuilder.toString();
     }

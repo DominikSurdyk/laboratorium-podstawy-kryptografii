@@ -36,5 +36,29 @@ class StringHelperTest {
         assertEquals(Arrays.asList("123"), result);
     }
 
+    @Test
+    public void shouldJoinCorrectly(){
+        // given
+        List<String> message = Arrays.asList("123", "3", "2", "43", "1");
+
+        // when
+        String result = uut.join(message);
+
+        // then
+        assertEquals("123 3 2 43 1", result);
+    }
+
+    @Test
+    public void shouldJoinCorrectlyOneWord(){
+        // given
+        List<String> message = List.of("21");
+
+        // when
+        String result = uut.join(message);
+
+        // then
+        assertEquals("21", result);
+    }
+
 
 }
