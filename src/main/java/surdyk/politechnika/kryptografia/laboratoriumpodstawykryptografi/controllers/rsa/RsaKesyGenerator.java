@@ -2,10 +2,10 @@ package surdyk.politechnika.kryptografia.laboratoriumpodstawykryptografi.control
 
 public class RsaKesyGenerator {
 
-    public int findKey(int e, int q){
+    public int findKey(int e, int phi){
         int i = 0;
         while (true){
-            int result = (e * i) % q;
+            int result = (e * i) % phi;
             if (result == 1){
                 return i;
             }

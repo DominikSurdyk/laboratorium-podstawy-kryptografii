@@ -10,7 +10,7 @@ class RsaKesyGeneratorTest {
 
     @Test
     public void findQ() {
-        int result = uut.findKey(3, 640);
+        int result = uut.findKey(17, 3395088);
         System.out.println(result);
     }
 

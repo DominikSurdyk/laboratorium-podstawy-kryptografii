@@ -14,10 +14,10 @@ public class RsaEncryptor {
         return result;
     }
 
-    public List<String> decryptAsNumber(final List<String> messages, final String e, final String n) {
+    public List<String> decryptAsNumber(final List<String> messages, final String d, final String n) {
         List<String> result = new LinkedList<>();
         for (String message : messages) {
-            result.add(decryptAsNumber(message, e, n));
+            result.add(decryptAsNumber(message, d, n));
         }
         return result;
     }
@@ -32,8 +32,8 @@ public class RsaEncryptor {
 
     public String decryptAsNumber(final String message, final String d, final String n) {
         BigInteger messageEncoded = new BigInteger(message);
-        int eEncoded = Integer.parseInt(d);
-        messageEncoded = messageEncoded.pow(eEncoded);
+        int dEncoded = Integer.parseInt(d);
+        messageEncoded = messageEncoded.pow(dEncoded);
         messageEncoded = messageEncoded.mod(new BigInteger(n));
         return messageEncoded.toString();
     }
